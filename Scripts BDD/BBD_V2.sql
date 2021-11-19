@@ -24,17 +24,20 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+INSERT INTO `service` (`id`, `nom`) VALUES
+(1, 'Administration'),
+(2, 'Radiologie'),
+(3, 'Chirurgie'),
+(4, 'Cardiologie'),
+(5, 'Traumatologie'),
+(6, 'Hématologie'),
+(7, 'Urologie');
+
 --
 -- Structure de la table `chambre`
 --
 
-DROP TABLE IF EXISTS `chambre`;
-CREATE TABLE IF NOT EXISTS `chambre` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `num_service_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_C509E4FF624BE96D` (`num_service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `chambre`
@@ -66,20 +69,11 @@ INSERT INTO `chambre` (`id`, `num_service_id`) VALUES
 -- Structure de la table `doctrine_migration_versions`
 --
 
-DROP TABLE IF EXISTS `doctrine_migration_versions`;
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
-  `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `doctrine_migration_versions`
 --
 
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20211116134042', '2021-11-19 14:53:20', 3103);
 
 -- --------------------------------------------------------
 
@@ -87,12 +81,6 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- Structure de la table `patient`
 --
 
-DROP TABLE IF EXISTS `patient`;
-CREATE TABLE IF NOT EXISTS `patient` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `patient`
@@ -108,18 +96,6 @@ INSERT INTO `patient` (`id`, `nom`) VALUES
 -- Structure de la table `sejour`
 --
 
-DROP TABLE IF EXISTS `sejour`;
-CREATE TABLE IF NOT EXISTS `sejour` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `num_chambre_id` int(11) DEFAULT NULL,
-  `num_patient_id` int(11) DEFAULT NULL,
-  `date_arrivee` date DEFAULT NULL,
-  `date_depart` date DEFAULT NULL,
-  `commentaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_96F5202814003FDF` (`num_chambre_id`),
-  KEY `IDX_96F52028E49ED2F2` (`num_patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `sejour`
@@ -135,25 +111,12 @@ INSERT INTO `sejour` (`id`, `num_chambre_id`, `num_patient_id`, `date_arrivee`, 
 -- Structure de la table `service`
 --
 
-DROP TABLE IF EXISTS `service`;
-CREATE TABLE IF NOT EXISTS `service` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `service`
 --
 
-INSERT INTO `service` (`id`, `nom`) VALUES
-(1, 'Administration'),
-(2, 'Radiologie'),
-(3, 'Chirurgie'),
-(4, 'Cardiologie'),
-(5, 'Traumatologie'),
-(6, 'Hématologie'),
-(7, 'Urologie');
+
 
 -- --------------------------------------------------------
 
@@ -161,17 +124,6 @@ INSERT INTO `service` (`id`, `nom`) VALUES
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `num_service_id` int(11) DEFAULT NULL,
-  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`),
-  KEY `IDX_8D93D649624BE96D` (`num_service_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
@@ -179,23 +131,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 --
 -- Contraintes pour la table `chambre`
---
-ALTER TABLE `chambre`
-  ADD CONSTRAINT `FK_C509E4FF624BE96D` FOREIGN KEY (`num_service_id`) REFERENCES `service` (`id`);
 
---
--- Contraintes pour la table `sejour`
---
-ALTER TABLE `sejour`
-  ADD CONSTRAINT `FK_96F5202814003FDF` FOREIGN KEY (`num_chambre_id`) REFERENCES `chambre` (`id`),
-  ADD CONSTRAINT `FK_96F52028E49ED2F2` FOREIGN KEY (`num_patient_id`) REFERENCES `patient` (`id`);
-
---
--- Contraintes pour la table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `FK_8D93D649624BE96D` FOREIGN KEY (`num_service_id`) REFERENCES `service` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
