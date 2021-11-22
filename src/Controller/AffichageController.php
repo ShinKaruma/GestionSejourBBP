@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Patient;
+use App\Entity\Sejour;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,22 @@ class AffichageController extends AbstractController
 
         return $this->render('affichage/index.html.twig', [
             'controller_name' => 'AffichageController',
+            'user'=>$user,
+        ]);
+    }
+
+    /**
+     * @Route("/sejour-liste", name="sejour_liste")
+     */
+    public function affichageSejour(): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $lesSejours=$repository->findBy(['dateDepart' => null]);
+
+        return $this->render('affichage/affichagesejour.html.twig', [
+            'controller_name' => 'Les séjours ce jour',
+            'sejours'=>$lesSejours,
             'user'=>$user,
         ]);
     }
