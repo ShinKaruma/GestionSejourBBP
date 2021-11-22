@@ -14,7 +14,7 @@
 		Nombre de Patients: {{patients|length}}
 		<ul>
 			{%for patient in patients%}
-				<li>Id du patient: {{patient.id}} Nom du patient: {{patient.nom}}</li>
+				<li>Id du patient: {{patient.id}}<br> Nom du patient: {{patient.nom}}<br> Prénom du patient: {{patient.prenom}}<br> Date de naissance: {{patient.datenaissance|date('Y-m-d')}}</li>
 			{%else%}
 				Pas de patients trouvé.
 			{%endfor%}

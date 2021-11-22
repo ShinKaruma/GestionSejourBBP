@@ -15,6 +15,8 @@ class PatientType extends AbstractType
     {
         $builder
             ->add('nom')
+			->add('prenom')
+			->add('datenaissance')
 			->add('save',SubmitType::class, array('label'=>'Enregistrer le Patient'))
         ;
     }
