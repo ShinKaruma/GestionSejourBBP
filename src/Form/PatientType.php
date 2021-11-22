@@ -15,9 +15,9 @@ class PatientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-			->add('prenom')
-			->add('datenaissance', DateType::class, [
+            ->add('nom', TextType::class, array('label'=>'Nom du Patient : '))
+			->add('prenom', TextType::class, array('label'=>'Prénom du Patient : '))
+			->add('datenaissance', DateType::class,[
     'widget' => 'single_text',
     'input'  => 'datetime_immutable'
 ])

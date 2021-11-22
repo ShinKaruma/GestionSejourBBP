@@ -29,13 +29,42 @@ class PatientController extends AbstractController
 			$em->persist($patient);
 			$em->flush();
 			//redirection vers l'accueil des patients
-			return $this->redirectToRoute('patient');
+			return $this->redirectToRoute('patient_liste');
 		}
 		return $this->render('patient/ajoutpatient.html.twig',array('form'=>$form->createView(),
 			'user'=>$user,
 		));
 	}
+	/**
+     * @Route("/modifpatient/{id}", name="modifpatient")
+     */
+	public function modiformulaire($id,Request $request): Response
+    {
+		$repository=$this->getDoctrine()->getRepository(Patient::class);
+		$patient=$repository->find($id);
+		$form=$this->createFormBuilder($patient)
+					->add('nom',TextType::class,array('label'=>'Nom du Patient : '))
+					->add('prenom',TextType::class)
+					->add('date',DateType::class)
+					->add('save',SubmitType::class,array('label'=>'Modifier le Patient'))
+					->getForm();
+		
+        
+		$form->handleRequest($request);
+		if($form->isSubmitted() && $form->isValid()){
+			$patient= $form->getData();
+			$em=$this->getDoctrine()->getManager();
+			$em->persist($patient);
+			$em->flush();
+		
+			return $this->redirectToRoute('patient_liste');
+		}
+		return $this->render('patient/index.html.twig',array(
+				'form'=>$form->createView(),
+			));
 	
+	
+	}
 	
 	
 }
