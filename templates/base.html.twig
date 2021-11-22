@@ -22,6 +22,7 @@
               <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
             {% elseif 'ROLE_ADMIN' in user.getRoles %}
               <a href="{{path('register')}}">Inscrire un utilisateur</a>
+              <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
             {% elseif 'ROLE_DEV' in user.getRoles %}
               <a href="{{path('patient_ajout')}}">Ajouter un patient</a>
               <a href="{{path('patient_liste')}}">Liste des Patients</a>
