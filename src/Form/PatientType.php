@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Patient;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,7 +17,10 @@ class PatientType extends AbstractType
         $builder
             ->add('nom')
 			->add('prenom')
-			->add('datenaissance')
+			->add('datenaissance', DateType::class, [
+    'widget' => 'single_text',
+    'input'  => 'datetime_immutable'
+])
 			->add('save',SubmitType::class, array('label'=>'Enregistrer le Patient'))
         ;
     }
