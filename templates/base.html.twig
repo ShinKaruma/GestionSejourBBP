@@ -19,11 +19,13 @@
             {% if 'ROLE_INFIRMIER' in user.getRoles %}
 		      <a href="{{path('patient_ajout')}}">Ajouter un patient</a>
 		      <a href="{{path('patient_liste')}}">Liste des Patients</a>
+              <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
             {% elseif 'ROLE_ADMIN' in user.getRoles %}
               <a href="{{path('app_register')}}">Inscrire un utilisateur</a>
             {% elseif 'ROLE_DEV' in user.getRoles %}
               <a href="{{path('patient_ajout')}}">Ajouter un patient</a>
               <a href="{{path('patient_liste')}}">Liste des Patients</a>
+              <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
               <a href="{{path('app_register')}}">Inscrire un utilisateur</a>
             {% endif %}
           <a href="{{path('app_logout')}}">Déconnexion</a>
