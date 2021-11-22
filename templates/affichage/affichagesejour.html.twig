@@ -22,8 +22,6 @@
         	   <th> Numero de chambre </th>
         	   <th> Nom du patient </th>
         	   <th> Date d'arrivée </th>
-        	   <th> Date de départ </th>
-        	   <th> Commentaire </th>
             </tr>
             {% for sejour in sejours %}
             <tr>
@@ -31,8 +29,6 @@
             	<td>{{sejour.getNumChambre.getId}}</td>
             	<td>{{sejour.getNumPatient.getNom}}</td>
             	<td>{{sejour.getDateArrivee|date("d/m/Y")}}</td>
-            	<td>{% if sejour.getDateDepart() is null %} {% else %} {{sejour.getDateDepart|date("d/m/Y")}} {% endif %}</td>
-            	<td>{% if sejour.getCommentaire() is null %} {% else %} {{sejour.commentaire}} {% endif %}</td>
             </tr>
         
             {% else %}	
