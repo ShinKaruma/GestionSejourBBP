@@ -14,8 +14,14 @@
         {% endblock %}
     </head>
     <body>
-		<a href="{{path('ajout_patient')}}">Ajouter un patient</a><br>
-		<a href="{{path('patient')}}">Liste des Patients</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		  <a href="{{path('ajout_patient')}}">Ajouter un patient</a><br>
+		  <a href="{{path('patient')}}">Liste des Patients</a>
+          <a href="{{path('app_logout')}}">Déconnexion</a>
+        {% else %}
+          <a href="{{path('login')}}">Se connecter</a>
+        {% endif %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
