@@ -12,7 +12,7 @@ class LoginController extends AbstractController
     /**
      * @Route("/login", name="login")
      */
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -24,7 +24,7 @@ class LoginController extends AbstractController
 
 
     /**
-     * @Route("/logout", name="app_logout", methods={"GET"})
+     * @Route("/logout", name="logout", methods={"GET"})
      */
     public function logout(): void
     {
