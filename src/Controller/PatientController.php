@@ -12,22 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PatientController extends AbstractController
 {
-    /**
-     * @Route("/patient", name="patient")
-     */
-    public function index(): Response
-    {
-		$repository=$this->getDoctrine()->getRepository(Patient::class);
-		$lesPatients=$repository->findAll();
-        return $this->render('patient/index.html.twig', [
-            'controller_name' => 'PatientController',
-			'patients'=>$lesPatients,
-        ]);
-    }
+    
 	/**
-     * @Route("/ajoutpatient", name="ajout_patient")
+     * @Route("/patient-ajout", name="patient_ajout")
      */
 	public function ajoutpatient(Request $request){
+
+		$user = $this->getUser();
+
 		$patient=new Patient();
 		$form=$this->createForm(PatientType::class,$patient);
 		$form->handleRequest($request);
@@ -40,6 +32,7 @@ class PatientController extends AbstractController
 			return $this->redirectToRoute('patient');
 		}
 		return $this->render('patient/ajoutpatient.html.twig',array('form'=>$form->createView(),
+			'user'=>$user,
 		));
 	}
 	
