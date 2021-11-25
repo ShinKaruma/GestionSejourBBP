@@ -42,7 +42,7 @@ class AffichageController extends AbstractController
     /**
      * @Route("/patient-liste", name="patient_liste")
      */
-    public function lstPatient(): Response
+    public function affichagePatient(): Response
     {$user = $this->getUser();
 
         $repository=$this->getDoctrine()->getRepository(Patient::class);
