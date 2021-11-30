@@ -39,9 +39,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/register, roles: [ROLE_ADMIN, ROLE_DEV] }
-         - { path: ^/patient, roles: [ROLE_INFIRMIER, ROLE_DEV] }
-         - { path: /sejour-liste, roles: ROLE_ADMIN}
-         - { path: ^/sejour, roles: [ROLE_INFIRMIER, ROLE_DEV] }
-         
-         #- { path: ^/, roles: ROLE_USER}
+         - { path: ^/register, roles: ROLE_ADMIN }
+         - { path: ^/patient, roles: ROLE_ADMIN }
+         - { path: /sejour-liste, roles: [ROLE_ADMIN, ROLE_INFIRMIER]}
+         - { path: ^/sejour, roles: ROLE_INFIRMIER }
