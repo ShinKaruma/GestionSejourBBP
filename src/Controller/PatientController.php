@@ -5,6 +5,7 @@ use App\Entity\Patient;
 use App\Form\PatientType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,12 +41,16 @@ class PatientController extends AbstractController
      */
 	public function modiformulaire($id,Request $request): Response
     {
+		$user = $this->getUser();
 		$repository=$this->getDoctrine()->getRepository(Patient::class);
 		$patient=$repository->find($id);
 		$form=$this->createFormBuilder($patient)
 					->add('nom',TextType::class,array('label'=>'Nom du Patient : '))
-					->add('prenom',TextType::class)
-					->add('date',DateType::class)
+					->add('prenom',TextType::class,array('label'=>'Prenom du Patient : '))
+					->add('datenaissance', DateType::class,[
+    'widget' => 'single_text',
+    'input'  => 'datetime'
+])
 					->add('save',SubmitType::class,array('label'=>'Modifier le Patient'))
 					->getForm();
 		
@@ -59,12 +64,26 @@ class PatientController extends AbstractController
 		
 			return $this->redirectToRoute('patient_liste');
 		}
-		return $this->render('patient/index.html.twig',array(
+		return $this->render('patient/modifpatient.html.twig',array(
 				'form'=>$form->createView(),
+				'user'=>$user,
 			));
 	
 	
 	}
+	/**
+     * @Route("/suprpatient/{id}", name="suprpatient")
+     */
+	public function suprpatient($id)
+    {
+		$repository=$this->getDoctrine()->getRepository(Patient::class);
+		$patient=$repository->find($id);
+			$em=$this->getDoctrine()->getManager();
+			$em->remove($patient);
+			$em->flush();
+		
+			return $this->redirectToRoute('patient_liste');
+		}
 	
 	
 }
