@@ -26,14 +26,13 @@ class AffichageController extends AbstractController
     /**
      * @Route("/sejour-liste", name="sejour_liste")
      */
-    public function affichageSejour(): Response
+    public function affichageDebutSejour(): Response
     {
         $user = $this->getUser();
         $repository=$this->getDoctrine()->getRepository(Sejour::class);
-        $lesSejours=$repository->findBy(['dateDepart' => null]);
-
+        $lesSejours=$repository->findAll();
         return $this->render('affichage/affichagesejour.html.twig', [
-            'controller_name' => 'Les séjours ce jour',
+            'controller_name' => 'Les séjours qui débute ce jour',
             'sejours'=>$lesSejours,
             'user'=>$user,
         ]);
