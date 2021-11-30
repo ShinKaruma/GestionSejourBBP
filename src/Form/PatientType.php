@@ -17,10 +17,7 @@ class PatientType extends AbstractType
         $builder
             ->add('nom', TextType::class, array('label'=>'Nom du Patient : '))
 			->add('prenom', TextType::class, array('label'=>'Prénom du Patient : '))
-			->add('datenaissance', DateType::class,[
-    'widget' => 'single_text',
-    'input'  => 'datetime_immutable'
-])
+			->add('datenaissance', DateType::class,['widget' => 'single_text','input'  => 'datetime_immutable', 'label'  =>'Date de Naissance : '])
 			->add('save',SubmitType::class, array('label'=>'Enregistrer le Patient'))
         ;
     }

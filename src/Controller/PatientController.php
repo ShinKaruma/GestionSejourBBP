@@ -49,7 +49,8 @@ class PatientController extends AbstractController
 					->add('prenom',TextType::class,array('label'=>'Prenom du Patient : '))
 					->add('datenaissance', DateType::class,[
     'widget' => 'single_text',
-    'input'  => 'datetime'
+    'input'  => 'datetime', 
+	'label'=>'Date de Naissance : '
 ])
 					->add('save',SubmitType::class,array('label'=>'Modifier le Patient'))
 					->getForm();
