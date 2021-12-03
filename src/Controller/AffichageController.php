@@ -39,6 +39,21 @@ class AffichageController extends AbstractController
     }
 
     /**
+     * @Route("/sejour-listecour", name="sejour_listecour")
+     */
+    public function affichageSejourEnCour(): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $lesSejours=$repository->findAll();
+        return $this->render('affichage/affichagesejourencour.html.twig', [
+            'controller_name' => 'Les séjours en cours',
+            'sejours'=>$lesSejours,
+            'user'=>$user,
+        ]);
+    }   
+
+    /**
      * @Route("/patient-liste", name="patient_liste")
      */
     public function affichagePatient(): Response
