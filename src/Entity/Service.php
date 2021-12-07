@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Form\FormTypeInterface;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,5 +38,10 @@ class Service
         $this->nom = $nom;
 
         return $this;
+    }
+
+    public function toString(): ?string
+    {
+        return $this->nom;
     }
 }

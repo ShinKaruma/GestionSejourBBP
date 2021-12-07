@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\User;
-
+use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -42,10 +43,23 @@ class RegistrationFormType extends AbstractType
                 'choices'=>array(
                     'admin'=>'ROLE_ADMIN', 'infirmier'=>'ROLE_INFIRMIER',
                     'user'=>'ROLE_USER'),
+                'attr'=>array('onchange' => 'if(registration_form_roles_1.checked === true){document.getElementById("registration_form_numService").hidden = false;document.getElementById("registration_form_numService").required = true;}else{document.getElementById("registration_form_numService").hidden = true;}'),
                 'expanded'=>true,
                 'multiple'=>true
 
             ])
+            ->add('numService', EntityType::class, array(
+                        'class'=> Service::class,
+                        'placeholder' => 'Choisir un Service',
+                        'attr'=>array(
+                            'hidden'=>true                            
+                        ),
+                        'label'=>'Service de l\'utilisateur : ',
+                        'choice_label'=>'nom',
+                        'required' => false,
+                        'expanded'=>false
+            ))
+
         ;
     }
 
