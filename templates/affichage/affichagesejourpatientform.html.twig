@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage des séjours{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table{ border-collapse: collapse; table-layout: fixed; width: 1000px; }
+    td,th { border: 1px solid black; text-align: center; vertical-align: middle; }
+
+</style>
+
+<div class="example-wrapper">
+    <h1>Trouver un séjour à partir d'un patient</h1>
+    {{form_start(form)}} 
+    {{form_widget(form)}}
+    {{form_end(form)}}
+</div>
+{% endblock %}

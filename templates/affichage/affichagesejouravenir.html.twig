@@ -12,7 +12,6 @@
 </style>
 
 <div class="example-wrapper">
-
     <h1>{{ controller_name }}</h1>
 
     {% if(sejours|length >0) %}
@@ -24,7 +23,7 @@
         	   <th> Date d'arrivée </th>
             </tr>
             {% for sejour in sejours %}
-                {% if(sejour.getDateArrivee|date("Y-m-d")) == ("now"|date("Y-m-d")) %}
+                {% if(sejour.getDateArrivee|date("Y-m-d")) > ("now"|date("Y-m-d")) %}
                     <tr>
                     	<td>{{sejour.id}}</td>
                     	<td>{{sejour.getNumChambre.getId}}</td>

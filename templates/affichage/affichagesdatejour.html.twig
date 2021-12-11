@@ -12,25 +12,26 @@
 </style>
 
 <div class="example-wrapper">
-
     <h1>{{ controller_name }}</h1>
 
     {% if(sejours|length >0) %}
         <table>
             <tr>
-        	   <th> Id </th>
-        	   <th> Numero de chambre </th>
-        	   <th> Nom du patient </th>
-        	   <th> Date d'arrivée </th>
+               <th> Id </th>
+               <th> Numero de chambre </th>
+               <th> Nom du patient </th>
+               <th> Date d'arrivée </th>
             </tr>
             {% for sejour in sejours %}
-                {% if(sejour.getDateArrivee|date("Y-m-d")) == ("now"|date("Y-m-d")) %}
+                {% if(sejour.getDateDepart()) == null %}
                     <tr>
-                    	<td>{{sejour.id}}</td>
-                    	<td>{{sejour.getNumChambre.getId}}</td>
-                    	<td>{{sejour.getNumPatient.getNom}}</td>
-                    	<td>{{sejour.getDateArrivee|date("Y-m-d")}}</td>
+                        <td>{{sejour.id}}</td>
+                        <td>{{sejour.getNumChambre.getId}}</td>
+                        <td>{{sejour.getNumPatient.getNom}}</td>
+                        <td>{{sejour.getDateArrivee|date("Y-m-d")}}</td>
                     </tr>
+                {% else %}  
+                    Pas de séjour trouvé.
                 {% endif %}
             {% else %}	
     		  Pas de séjour trouvé.

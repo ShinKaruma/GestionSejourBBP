@@ -4,7 +4,13 @@ namespace App\Controller;
 use App\Entity\Patient;
 use App\Entity\Sejour;
 
+use App\Form\SejourType;
+use App\Form\SejourPreType;
+use App\Form\SejourPatientType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -39,19 +45,90 @@ class AffichageController extends AbstractController
     }
 
     /**
-     * @Route("/sejour-listecour", name="sejour_listecour")
+     * @Route("/sejour-liste-avenir", name="sejour_liste_avenir")
+     */
+    public function affichageSejourAVenir(): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $lesSejours=$repository->findAll();
+        return $this->render('affichage/affichagesejouravenir.html.twig', [
+            'controller_name' => 'Les séjours à venir',
+            'sejours'=>$lesSejours,
+            'user'=>$user,
+        ]);
+    }
+
+    /**
+     * @Route("/sejour-liste-encour", name="sejour_listecour")
      */
     public function affichageSejourEnCour(): Response
     {
         $user = $this->getUser();
         $repository=$this->getDoctrine()->getRepository(Sejour::class);
         $lesSejours=$repository->findAll();
-        return $this->render('affichage/affichagesejourencour.html.twig', [
+
+        return $this->render('affichage/affichagesejourdatepreciseform.html.twig', [
             'controller_name' => 'Les séjours en cours',
             'sejours'=>$lesSejours,
             'user'=>$user,
         ]);
     }   
+
+    /**
+     * @Route("/sejour-liste-dateprecise", name="sejour_liste_dateprecise")
+     */
+    public function affichageSejourDatePreciseForm(Request $request): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+
+        $form=$this->createForm(SejourPreType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+
+            $date=$form['dateArrivee']->getData();
+            
+            $lesSejours=$repository->findByDateArrivee($date);
+
+            
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            //redirection vers l'accueil des sejours
+            return $this->render('affichage/affichagesdatejour.html.twig', ['controller_name'=>'Séjours à une date précise', 'user'=>$user, 'sejours'=>$lesSejours]);
+        }
+
+        return $this->render('affichage/affichageSejourDatePreciseForm.html.twig',array('form'=>$form->createView(),
+            'user'=>$user,
+        ));
+    }
+
+    /**
+     * @Route("/sejour-liste-patient", name="sejour_liste_patient")
+     */
+    public function affichageSejourPatientForm(Request $request): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $form=$this->createForm(SejourPatientType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->isValid()){
+
+            $numPatient=$form['numPatient']->getData();
+            
+            $lesSejours=$repository->findByNumPatient($numPatient);
+
+            
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
+            //redirection vers l'accueil des sejours
+            return $this->render('affichage/affichagesdatejour.html.twig', ['controller_name'=>'Séjours à un patient précis', 'user'=>$user, 'sejours'=>$lesSejours]);
+        }
+        
+        return $this->render('affichage/affichagesejourpatientform.html.twig',array('form'=>$form->createView(),
+            'user'=>$user,
+        ));
+    }
 
     /**
      * @Route("/patient-liste", name="patient_liste")
