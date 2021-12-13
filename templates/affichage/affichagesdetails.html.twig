@@ -21,19 +21,26 @@
                <th> Numero de chambre </th>
                <th> Nom du patient </th>
                <th> Date d'arrivée </th>
+               <th> Date du départ </th>
+               <th> Commentaire </th>
             </tr>
             {% for sejour in sejours %}
-                {% if(sejour.getDateDepart()) == null %}
                     <tr>
                         <td>{{sejour.id}}</td>
                         <td>{{sejour.getNumChambre.getId}}</td>
                         <td>{{sejour.getNumPatient.getNom}}</td>
                         <td>{{sejour.getDateArrivee|date("Y-m-d")}}</td>
-                        <td><a href={{path('sejour_liste_details',{id:sejour.id})}}">Détails</a></td>
+                        {% if sejour.getCommentaire is null %}
+                            <td>---</td>
+                        {% else %}
+                            <td>{{sejour.getDateDepart|date("Y-m-d")}}</td>
+                        {% endif %}
+                        {% if sejour.getCommentaire is null %}
+                            <td>---</td>
+                        {% else %}
+                            <td>{{sejour.getCommentaire}}</td>
+                        {% endif %}
                     </tr>
-                {% else %}  
-                    Pas de séjour trouvé.
-                {% endif %}
             {% else %}	
     		  Pas de séjour trouvé.
             {% endfor %}

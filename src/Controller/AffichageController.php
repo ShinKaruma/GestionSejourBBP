@@ -68,7 +68,7 @@ class AffichageController extends AbstractController
         $repository=$this->getDoctrine()->getRepository(Sejour::class);
         $lesSejours=$repository->findAll();
 
-        return $this->render('affichage/affichagesejourdatepreciseform.html.twig', [
+        return $this->render('affichage/affichagesejourencour.html.twig', [
             'controller_name' => 'Les séjours en cours',
             'sejours'=>$lesSejours,
             'user'=>$user,
@@ -128,6 +128,21 @@ class AffichageController extends AbstractController
         return $this->render('affichage/affichagesejourpatientform.html.twig',array('form'=>$form->createView(),
             'user'=>$user,
         ));
+    }
+
+    /**
+     * @Route("/sejour-liste-details/{id}", name="sejour_liste_details")
+     */
+    public function affichageSejourDetails($id): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $lesSejours=$repository->findById($id);
+        return $this->render('affichage/affichagesdetails.html.twig', [
+            'controller_name' => 'Détails du séjour',
+            'sejours'=>$lesSejours,
+            'user'=>$user,
+        ]);
     }
 
     /**
