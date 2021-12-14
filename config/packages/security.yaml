@@ -41,4 +41,4 @@ security:
     access_control:
          - { path: ^/register, roles: ROLE_ADMIN }
          - { path: ^/patient, roles: ROLE_ADMIN }
-         - { path: ^/sejour, roles: ROLE_INFIRMIER }
+         - { path: ^/sejour-liste, roles: [ROLE_INFIRMIER, ROLE_ADMIN] }
