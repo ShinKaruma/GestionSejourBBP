@@ -42,6 +42,16 @@ class Sejour
      */
     private $numPatient;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validationSortie;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $validationEntree;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +113,30 @@ class Sejour
     public function setNumPatient(?Patient $numPatient): self
     {
         $this->numPatient = $numPatient;
+
+        return $this;
+    }
+
+    public function getValidationSortie(): ?bool
+    {
+        return $this->validationSortie;
+    }
+
+    public function setValidationSortie(bool $validationSortie): self
+    {
+        $this->validationSortie = $validationSortie;
+
+        return $this;
+    }
+
+    public function getValidationEntree(): ?bool
+    {
+        return $this->validationEntree;
+    }
+
+    public function setValidationEntree(bool $validationEntree): self
+    {
+        $this->validationEntree = $validationEntree;
 
         return $this;
     }
