@@ -25,7 +25,7 @@
         	   <th> Date d'arrivée </th>
             </tr>
             {% for sejour in sejours %}
-                {% if(sejour.getDateArrivee|date("Y-m-d")) <= ("now"|date("Y-m-d")) and (sejour.getDateDepart()) == null %}
+                {% if(sejour.getDateArrivee|date("Y-m-d")) <= ("now"|date("Y-m-d")) and (sejour.getDateDepart()) == null and (sejour.getValidationEntree()) == 0 %}
 
                     <tr>
                     	<td>{{sejour.id}}</td>
