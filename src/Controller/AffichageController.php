@@ -30,6 +30,7 @@ class AffichageController extends AbstractController
     }
 
     /**
+
      * @Route("/sejour-all", name="sejour_all")
      */
     public function affichageSejourAll(): Response
@@ -45,7 +46,7 @@ class AffichageController extends AbstractController
     }
 
     /**
-     * @Route("/sejour-liste", name="sejour_liste")
+     * @Route("/sejour-liste-cejour", name="sejour_liste_cejour")
      */
     public function affichageDebutSejour(): Response
     {
