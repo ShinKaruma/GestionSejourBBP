@@ -111,7 +111,18 @@
             <a href="{{path('principal')}}">Acceuil</a>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {% if 'ROLE_INFIRMIER' in user.getRoles %}
-              <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
+              <div class="dropdown">              
+              <button class="dropbtn">Affichage des séjours
+                  <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                      <a href="{{path('sejour_liste_cejour')}}">Liste des séjours qui débutent ce jour</a>
+                      <a href="{{path('sejour_liste_avenir')}}">Liste des séjours à venir</a>
+                      <a href="{{path('sejour_listecour')}}">Liste des séjours en cours</a>
+                      <a href="{{path('sejour_liste_dateprecise')}}">Liste des séjours à une date précise</a>
+                      <a href="{{path('sejour_liste_patient')}}">Liste des séjours des patients</a>
+                  </div>
+              </div> 
             {% elseif 'ROLE_ADMIN' in user.getRoles %}
             <a href="{{path('register')}}">Ajouter un utilisateur</a>
                 <div class="dropdown">
@@ -129,7 +140,7 @@
                   </button>
                   <div class="dropdown-content">
                       <a href="{{path('sejour_ajout')}}">Ajouter un séjour</a>
-                      <a href="{{path('sejour_liste')}}">Liste des séjours en cours</a>
+                      <a href="{{path('sejour_all')}}">Liste des séjours en cours</a>
                   </div>
               </div>      
             {% endif %}
