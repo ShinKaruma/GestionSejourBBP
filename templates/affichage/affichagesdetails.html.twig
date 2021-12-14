@@ -40,6 +40,7 @@
                         {% else %}
                             <td>{{sejour.getCommentaire}}</td>
                         {% endif %}
+                        <td><a href="{{path('modifsejour',{id:sejour.id})}}">Modifier</a></td>
                     </tr>
             {% else %}	
     		  Pas de séjour trouvé.
