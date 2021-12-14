@@ -45,7 +45,7 @@ class Sejour
     /**
      * @ORM\Column(type="boolean")
      */
-    private $validationSortie;
+    private $validationDepart;
 
     /**
      * @ORM\Column(type="boolean")
