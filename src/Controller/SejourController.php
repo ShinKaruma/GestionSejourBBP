@@ -58,7 +58,6 @@ class SejourController extends AbstractController
 		$sejour=$repository->find($id);
 		$form=$this->createFormBuilder($sejour)
 					->add('dateArrivee', DateType::class,['widget' => 'single_text','input'  => 'datetime', 'label'  =>'Date d\'Arrivee : '])
-					->add('dateDepart', DateType::class,['widget' => 'single_text','input'  => 'datetime', 'label'  =>'Date de Depart : '])
 					->add('Commentaire', TextType::class, array('label'=>'Commentaire optionnel : '))
 					->add('numChambre',EntityType::class, array('class'=>Chambre::class, 'choice_label'=>'id', 'placeholder'=>'Choisir une Chambre'))
 					->add('numPatient',EntityType::class, array('class'=>Patient::class, 'choice_label'=>'id', 'placeholder'=>'Choisir un Patient'))

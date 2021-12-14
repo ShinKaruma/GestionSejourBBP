@@ -19,7 +19,7 @@ class SejourType extends AbstractType
     {
         $builder
 			->add('dateArrivee', DateType::class,['widget' => 'single_text','input'  => 'datetime_immutable', 'label'  =>'Date d\'Arrivee : '])
-            ->add('dateDepart', DateType::class,['widget' => 'single_text','input'  => 'datetime_immutable', 'label'  =>'Date de Depart : '])
+            
             ->add('Commentaire', TextType::class, array('label'=>'Commentaire optionnel : '))
             ->add('numChambre',EntityType::class, array('class'=>Chambre::class, 'choice_label'=>'id', 'placeholder'=>'Choisir une Chambre'))
             ->add('numPatient',EntityType::class, array('class'=>Patient::class, 'choice_label'=>'id', 'placeholder'=>'Choisir un Patient'))
