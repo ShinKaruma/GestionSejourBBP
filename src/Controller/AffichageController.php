@@ -30,7 +30,6 @@ class AffichageController extends AbstractController
     }
 
     /**
-
      * @Route("/sejour-all", name="sejour_all")
      */
     public function affichageSejourAll(): Response
@@ -40,6 +39,21 @@ class AffichageController extends AbstractController
         $lesSejours=$repository->findAll();
         return $this->render('affichage/affichagesejourall.html.twig', [
             'controller_name' => 'Tous les séjours',
+            'sejours'=>$lesSejours,
+            'user'=>$user,
+        ]);
+    }
+
+    /**
+     * @Route("/sejour-all-depart", name="sejour_all_depart")
+     */
+    public function affichageSejourAllDepart(): Response
+    {
+        $user = $this->getUser();
+        $repository=$this->getDoctrine()->getRepository(Sejour::class);
+        $lesSejours=$repository->findAll();
+        return $this->render('affichage/affichagesejouralldepart.html.twig', [
+            'controller_name' => 'Tous les séjours archivé',
             'sejours'=>$lesSejours,
             'user'=>$user,
         ]);

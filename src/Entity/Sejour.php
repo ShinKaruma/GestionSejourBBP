@@ -117,14 +117,14 @@ class Sejour
         return $this;
     }
 
-    public function getValidationSortie(): ?bool
+    public function getValidationDepart(): ?bool
     {
-        return $this->validationSortie;
+        return $this->validationDepart;
     }
 
-    public function setValidationSortie(bool $validationSortie): self
+    public function setValidationDepart(bool $validationDepart): self
     {
-        $this->validationSortie = $validationSortie;
+        $this->validationDepart = $validationDepart;
 
         return $this;
     }
